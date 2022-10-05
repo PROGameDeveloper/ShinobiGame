@@ -148,7 +148,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -156,6 +156,48 @@ TextureImporter:
       bones: []
       spriteID: 9e3f8f489dd1a3c4d8fabed390a7b998
       internalID: -1821080620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level_1_1_Background_Atlas_0
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 1928
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b0233a1599714e46ae54ef9ea8002aa
+      internalID: -322831816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Box
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 1961
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9615a5635d096b4a99ba648670366be
+      internalID: 677205049
       vertices: []
       indices: 
       edges: []
@@ -173,6 +215,8 @@ TextureImporter:
     nameFileIdTable:
       Building1: -645743146
       Ground_1_1: -1821080620
+      Level_1_1_Background_Atlas_0: -322831816
+      Box: 677205049
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
