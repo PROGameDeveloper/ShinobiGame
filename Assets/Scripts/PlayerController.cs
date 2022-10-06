@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -13,10 +14,9 @@ public class PlayerController : MonoBehaviour
     private Animator basicPlayerAnimator;
     private int IdSpeed;
     private bool isFlippedInX;
-    private bool isGrounded;
-    private float isGroundedRange;
-    private LayerMask selectedLayerMask;
-    private Transform checkGroundPoint;
+    Vector3 faceNegative = new Vector3(-1, 1, 1);
+    Vector3 facePositive = Vector3.one;
+    [SerializeField] private Joystick joystick;
 
     private void Awake()
     {
@@ -30,48 +30,28 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        CheckAndSetDirection();
+        Vector2 direction = GetSetDirection();
+    }
+
+    private void Hola()
+    {
+        throw new NotImplementedException();
     }
 
     private void Move()
     {
         float inputX = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        playerRB.velocity = new Vector2(inputX, playerRB.velocity.y);
-        basicPlayerAnimator.SetFloat(IdSpeed, Math.Abs(inputX));
+        float inputXJoystick = joystick.Horizontal * moveSpeed;
+        playerRB.velocity = new Vector2(inputXJoystick, playerRB.velocity.y);
+        //playerRB.velocity = new Vector2(inputX, playerRB.velocity.y);
+        basicPlayerAnimator.SetFloat(IdSpeed, Math.Abs(inputXJoystick));
     }
 
-    private void CheckAndSetDirection()
+    private Vector2 GetSetDirection()
     {
-        if (playerRB.velocity.x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-            isFlippedInX = true;
-        }
-        else if (playerRB.velocity.x > 0)
-        {
-            transform.localScale = Vector3.one;
-            isFlippedInX = false;
-        }
-    }
-
-    private void Jump()
-    {
-        isGrounded = Physics2D.Raycast(checkGroundPoint.position, Vector2.down, isGroundedRange, selectedLayerMask);
-        if (Input.GetButtonDown("Jump") && (isGrounded || (canDoubleJump && playerExtrasTracker.CanDoubleJump)))
-        {
-            if (isGrounded)
-            {
-                canDoubleJump = true;
-                Instantiate(dustJump, transformDustPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                canDoubleJump = false;
-                animatorStandingPlayer.SetTrigger(IdCanDoubleJump);
-            }
-            playerRB.velocity = new Vector2(playerRB.velocity.x, jumpForce);
-        }
-        animatorStandingPlayer.SetBool(IdIsGrounded, isGrounded);
+        if (playerRB.velocity.x < 0) transform.localScale = faceNegative;
+        else if (playerRB.velocity.x > 0) transform.localScale = facePositive;
+        Move();
+        return transform.localScale;
     }
 }
